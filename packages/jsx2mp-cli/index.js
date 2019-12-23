@@ -56,6 +56,11 @@ function build(options = {}) {
   if (options.webpackConfig) {
     config = mergeWebpack(config, options.webpackConfig);
   }
+
+  if (typeof options.customWebpackConfig === 'function') {
+    options.customWebpackConfig(config);
+  }
+
   spinner.shouldClear = !skipClearStdout;
 
   const compiler = webpack(config);
@@ -107,6 +112,11 @@ function watch(options = {}) {
   if (options.webpackConfig) {
     config = mergeWebpack(config, options.webpackConfig);
   }
+
+  if (typeof options.customWebpackConfig === 'function') {
+    options.customWebpackConfig(config);
+  }
+
   spinner.shouldClear = !skipClearStdout;
 
   const compiler = webpack(config);
